@@ -48,7 +48,13 @@ function abrirModal(valor) {
         if (r == true) {
             //alert("You pressed OK!");
             $('#doctores').dataTable()._fnAjaxUpdate();
-            alert("Borrado correcto!");
+            //alert("Borrado correcto!");
+            $.gritter.add({
+                // (string | mandatory) the heading of the notification
+                title: 'This is a notice!',
+                // (string | mandatory) the text inside the notification
+                text: 'This will fade out after a certain amount of time.'
+            });
         } else {
             alert("You pressed Cancel!");
         }
