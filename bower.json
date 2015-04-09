@@ -4,6 +4,7 @@
   "dependencies": {
     "bootstrap": "~3.2.0",
     "datatables": "1.10.6",
-    "gritter": "~1.8.1"
+    "gritter": "1.8.1",
+    "fontawesome": "4.3.0"
   }
 }

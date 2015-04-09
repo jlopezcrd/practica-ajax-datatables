@@ -21,8 +21,8 @@ function cargarDatos() {
         { "data": "clinicas" },
         { "data": "id_doctor",
         'render': function(data) {
-            return "<div class='text-right'><button type='button' class='btn btn-info' onclick=abrirModal('editar&"+data+"');>Editar</button>"+
-            "<button type='button' class='btn btn-warning' onclick=abrirModal('borrar&"+data+"');>Borrar</button></div>";
+            return "<div class='text-right'><button type='button' class='btn btn-info' onclick=abrirModal('editar&"+data+"');><i class='fa fa-edit fa-3x'></i></button>"+
+            "<button type='button' class='btn btn-warning' onclick=abrirModal('borrar&"+data+"');><i class='fa fa-trash fa-3x'></i></button></div>";
         }
     },
         // return '<div class="text-right"><button type="button" class="btn btn-info" onclick=abrirModal(editar&'+ data +');>Editar</button> <a class="btn btn-warning" href=http://localhost/php/borrar.php?id_clinica=' + data + '>Borrar</a>'
