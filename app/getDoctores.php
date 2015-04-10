@@ -1,23 +1,62 @@
 <?php
 header("Access-Control-Allow-Origin: *");
-try {
-    $conn = require_once 'connect.php';
-    $sql = "SELECT * FROM doctores";
-    $result = $conn->prepare($sql) or die ($sql);
-    if (!$result->execute()) return false;
-    if ($result->rowCount() > 0) {
-        $json = array();
-        while ($row = $result->fetch()) {
-            $json[] = array(
-                'id_doctor' => $row['id_doctor'],
-                'nombre' =>$row['nombre'],
-                'numcolegiado' => $row['numcolegiado']
-                );
-        };
-        //$json['success'] = true;
-        echo json_encode($json);
-    }
-} catch (PDOException $e) {
-    echo 'Error: '. $e->getMessage();
-}
-?>
+/*
+ * DataTables example server-side processing script.
+ *
+ * Please note that this script is intentionally extremely simply to show how
+ * server-side processing can be implemented, and probably shouldn't be used as
+ * the basis for a large complex system. It is suitable for simple use cases as
+ * for learning.
+ *
+ * See http://datatables.net/usage/server-side for full details on the server-
+ * side processing requirements of DataTables.
+ *
+ * @license MIT - http://datatables.net/license_mit
+ */
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Easy set variables
+ */
+
+// DB table to use
+$table = 'clinicas';
+
+// Table's primary key
+$primaryKey = 'id_clinica';
+
+// Array of database columns which should be read and sent back to DataTables.
+// The `db` parameter represents the column name in the database, while the `dt`
+// parameter represents the DataTables column identifier. In this case simple
+// indexes
+$columns = array(
+    array( 'db' => 'numclinica',     'dt' => 'numclinica' ),
+    array( 'db' => 'nombre',  'dt' => 'nombre' ),
+    array( 'db' => 'razonsocial',   'dt' => 'razonsocial' ),
+    array( 'db' => 'cif',     'dt' => 'cif' ),
+    array( 'db' => 'localidad',     'dt' => 'localidad' ),
+    array( 'db' => 'provincia',     'dt' => 'provincia' ),
+    array( 'db' => 'direccion',     'dt' => 'direccion' ),
+    array( 'db' => 'cp',     'dt' => 'cp' ),
+    array( 'db' => 'id_tarifa',     'dt' => 'id_tarifa' ),
+    array( 'db' => 'id_clinica',     'dt' => 'id_clinica' ),
+    );
+
+// SQL server connection information
+$sql_details = array(
+    'user' => 'root',
+    'pass' => 'root',
+    'db'   => 'clinicas',
+    'host' => 'localhost'
+    );
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * If you just want to use the basic configuration for DataTables with PHP
+ * server-side, there is no need to edit below this line.
+ */
+
+require( 'ssp.class.php' );
+
+echo json_encode(
+    SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns )
+    );

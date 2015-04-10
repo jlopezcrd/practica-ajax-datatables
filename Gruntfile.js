@@ -36,7 +36,7 @@ module.exports = function (grunt) {
       },
       js: {
       files: ['<%= config.app %>/scripts/{,*/}*.js'],
-      tasks: ['jshint'],
+      //tasks: ['jshint'],
       options: {
         livereload: true
       }
@@ -192,7 +192,8 @@ livereload: {
       options: {
         dest: '<%= config.dist %>'
       },
-      html: '<%= config.app %>/index.html'
+      //html: '<%= config.app %>/index.html'
+      html: '<%= config.app %>/clinicas.html'
     },
 
     // Performs rewrites based on rev and the useminPrepare configuration

@@ -32,8 +32,8 @@
           <div class="header">
           <ul class="nav nav-tabs pull-right">
               <li><a href="#"><i class='fa fa-home fa-fw'></i> INICIO</a></li>
-              <li class="active sombreado"><a href="#"><i class='fa fa-book fa-fw'></i>  CLINICAS</a></li>
-              <li><a href="doctores.html"><i class='fa fa-users fa-fw'></i> DOCTORES</a></li>
+              <li><a href="clinicas.html"><i class='fa fa-book fa-fw'></i>  CLINICAS</a></li>
+              <li><a href="#"><i class='fa fa-users fa-fw'></i> DOCTORES</a></li>
               <li role="presentation" class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
                 <i class='fa fa-tasks fa-fw'></i> TRABAJOS <span class="caret"></span>
@@ -43,12 +43,12 @@
                     <li><a href="#"><i class='fa fa-truck fa-fw'></i> DEVOLUCIONES</a></li>
                   </ul>
               </li>
-              <li role="presentation" class="dropdown">
+              <li class="active sombreado" role="presentation" class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
                 <i class='fa fa-bar-chart fa-fw'></i> FACTURACION <span class="caret"></span>
                 </a>
                   <ul class="dropdown-menu" role="menu">
-                    <li><a href="tarifas.html"><i class='fa fa-line-chart fa-fw'></i> TARIFAS</a></li>
+                    <li class="active"><a href="#"><i class='fa fa-line-chart fa-fw'></i> TARIFAS</a></li>
                     <li><a href="#"><i class='fa fa-shopping-cart fa-fw'></i> FACTURAS</a></li>
                     <li><a href="#"><i class='fa fa-file-pdf-o fa-fw'></i> ALBARANES</a></li>
                   </ul>
@@ -67,18 +67,12 @@
             <button type="button" class='btn btn-default' title="Crear nueva clinica" alt="Crear nueva clinica"><i class="fa fa-plus fa-3x" onclick=abrirModal('crear&')></i></button>
             <button type="button" class='btn btn-default' title="Actualizar tabla" alt="Actualizar tabla"><i class="fa fa-refresh fa-3x" onclick=actualizarTablaDatos($(this)); id="refresh"></i></button>
             </div>
-            <table class="table table-striped" cellspacing="0" width="100%" id="clinicas">
+            <table class="table table-striped" cellspacing="0" width="100%" id="tarifas">
               <thead>
                 <tr>
-                  <td>NUMCL</td>
+                  <td>NUMERO</td>
                   <td>NOMBRE</td>
-                  <td>RAZONSOCIAL</td>
-                  <td>CIF</td>
-                  <td>LOCALIDAD</td>
-                  <td>PROVINCIA</td>
-                  <td>DIRECCION</td>
-                  <td>CP</td>
-                  <td>TARIFA</td>
+                  <td>DESCRIPCION</td>
                   <td class="text-center" style="min-width: 120px;">OPCIONES</td>
                 </tr>
               </thead>
@@ -161,7 +155,7 @@
       <!-- endbuild -->
 
       <!-- build:js({app,.tmp}) scripts/main.js -->
-      <script src="scripts/clinicas.js"></script>
+      <script src="scripts/tarifas.js"></script>
 
       <!-- endbuild -->
     </body>

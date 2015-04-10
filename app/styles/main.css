@@ -64,6 +64,10 @@ body {
   margin-top: 28px;
 }
 
+.sombreado{
+  -webkit-box-shadow: 0px -6px 7px -7px rgba(50, 50, 50, 0.75);
+}
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   .container {
