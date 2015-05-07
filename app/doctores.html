@@ -1,0 +1,164 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <title>practica ajax datatables</title>
+  <meta name="description" content="">
+  <meta lang="ES">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <!--<link rel="stylesheet" href="styles/font-awesome.min.css" />!-->
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!-- build:css(.) styles/vendor.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="bower_components/datatables/media/css/jquery.dataTables.css" />
+  <link rel="stylesheet" href="bower_components/jquery.gritter/css/jquery.gritter.css" />
+  <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css" />
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+  <!-- endbuild -->
+</head>
+<body>
+    <!--[if lt IE 10]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+      <![endif]-->
+
+
+      <div class="row-fluid">
+        <div class="col-lg-12">
+          <div class="header">
+            <ul class="nav nav-tabs pull-right">
+              <li><a href="#"><i class='fa fa-home fa-fw'></i> INICIO</a></li>
+              <li><a href="clinicas.html"><i class='fa fa-book fa-fw'></i>  CLINICAS</a></li>
+              <li class="active sombreado"><a href="#"><i class='fa fa-users fa-fw'></i> DOCTORES</a></li>
+              <li role="presentation" class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                  <i class='fa fa-tasks fa-fw'></i> TRABAJOS <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#"><i class='fa fa-file-text-o fa-fw'></i> PRESCRIPCIONES</a></li>
+                  <li><a href="#"><i class='fa fa-truck fa-fw'></i> DEVOLUCIONES</a></li>
+                </ul>
+              </li>
+              <li role="presentation" class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                  <i class='fa fa-bar-chart fa-fw'></i> FACTURACION <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="tarifas.html"><i class='fa fa-line-chart fa-fw'></i> TARIFAS</a></li>
+                  <li><a href="#"><i class='fa fa-shopping-cart fa-fw'></i> FACTURAS</a></li>
+                  <li><a href="#"><i class='fa fa-file-pdf-o fa-fw'></i> ALBARANES</a></li>
+                </ul>
+              </li>
+              <li><a href="#"><i class='fa fa-briefcase fa-fw'></i> MIS DATOS</a></li>
+              <li><a href="#"><i class='fa fa-envelope fa-fw'></i> CONTACTO</a></li>
+            </ul>
+            <h3 class="text-muted">GESTICLINIC S.L.</h3>
+          </div>
+          <div class="menu">
+
+          </div>
+
+          <div class="col-lg-12">
+            <div class="text-left" style="margin-bottom: 2%;">
+              <button type="button" class='btn btn-default' title="Crear nueva clinica" alt="Crear nueva clinica"><i class="fa fa-plus fa-3x" onclick=abrirModal('crear&')></i></button>
+              <button type="button" class='btn btn-default' title="Actualizar tabla" alt="Actualizar tabla"><i class="fa fa-refresh fa-3x" onclick=actualizarTablaDatos($(this)); id="refresh"></i></button>
+            </div>
+            <table class="table table-striped" cellspacing="0" width="100%" id="doctores">
+              <thead>
+                <tr>
+                  <td>ID DOCTOR</td>
+                  <td>NOMBRE</td>
+                  <td>COLEGIADO</td>
+                  <td>CLINICAS</td>
+                  <td class="text-center" style="min-width: 120px;">OPCIONES</td>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="col-lg-12">
+            <div class="footer">
+              <p>developez.org</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel"></h4>
+            </div>
+            <div class="modal-body" id="myModalBody">
+            </div>
+            <div class="modal-footer">
+              <button type="button" id="btn-cancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+              <button type="button" id="btn-guardar" class="btn btn-success">Guardar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ALerta -->
+      <div class="modal" id="alerta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="alert">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="alertaLabel"></h4>
+            </div>
+            <div class="modal-body" id="alertaBody">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- build:js(.) scripts/vendor.js -->
+      <!-- bower:js -->
+      <script src="bower_components/jquery/dist/jquery.js"></script>
+      <script src="bower_components/datatables/media/js/jquery.dataTables.js"></script>
+      <script src="bower_components/jquery.gritter/js/jquery.gritter.js"></script>
+      <!-- endbower -->
+      <!-- endbuild -->
+
+      <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+      <script>
+        (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+          function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+        e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+        e.src='//www.google-analytics.com/analytics.js';
+        r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+        ga('create','UA-XXXXX-X');ga('send','pageview');
+      </script>
+
+      <!-- build:js(.) scripts/plugins.js -->
+      <script src="bower_components/bootstrap/js/affix.js"></script>
+      <script src="bower_components/bootstrap/js/alert.js"></script>
+      <script src="bower_components/bootstrap/js/dropdown.js"></script>
+      <script src="bower_components/bootstrap/js/tooltip.js"></script>
+      <script src="bower_components/bootstrap/js/modal.js"></script>
+      <script src="bower_components/bootstrap/js/transition.js"></script>
+      <script src="bower_components/bootstrap/js/button.js"></script>
+      <script src="bower_components/bootstrap/js/popover.js"></script>
+      <script src="bower_components/bootstrap/js/carousel.js"></script>
+      <script src="bower_components/bootstrap/js/scrollspy.js"></script>
+      <script src="bower_components/bootstrap/js/collapse.js"></script>
+      <script src="bower_components/bootstrap/js/tab.js"></script>
+      <!-- endbuild -->
+
+      <!-- build:js({app,.tmp}) scripts/main.js -->
+      <script src="scripts/main.js"></script>
+
+      <!-- endbuild -->
+    </body>
+    </html>

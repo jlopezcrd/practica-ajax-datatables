@@ -29,7 +29,8 @@ body {
   margin-top: 0;
   margin-bottom: 0;
   line-height: 40px;
-  padding-bottom: 19px;
+  //JLC padding-bottom: 19px;
+  padding-bottom: 1px;
 }
 
 /* Custom page footer */
@@ -61,6 +62,10 @@ body {
 
 .marketing p + h4 {
   margin-top: 28px;
+}
+
+.sombreado{
+  -webkit-box-shadow: 0px -6px 7px -7px rgba(50, 50, 50, 0.75);
 }
 
 /* Responsive: Portrait tablets and up */

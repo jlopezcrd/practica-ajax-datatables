@@ -36,7 +36,7 @@ module.exports = function (grunt) {
       },
       js: {
       files: ['<%= config.app %>/scripts/{,*/}*.js'],
-      tasks: ['jshint'],
+      //tasks: ['jshint'],
       options: {
         livereload: true
       }
@@ -164,7 +164,8 @@ livereload: {
     wiredep: {
       app: {
         ignorePath: /^\/|\.\.\//,
-        src: ['<%= config.app %>/index.html'],
+        //src: ['<%= config.app %>/index.html'],
+        src: ['<%= config.app %>/*.html'],
         exclude: ['bower_components/bootstrap/dist/js/bootstrap.js']
       }
     },
@@ -191,7 +192,8 @@ livereload: {
       options: {
         dest: '<%= config.dist %>'
       },
-      html: '<%= config.app %>/index.html'
+      //html: '<%= config.app %>/index.html'
+      html: '<%= config.app %>/clinicas.html'
     },
 
     // Performs rewrites based on rev and the useminPrepare configuration
@@ -301,7 +303,22 @@ htmlmin: {
     cwd: 'bower_components/bootstrap/dist',
     src: 'fonts/*',
     dest: '<%= config.dist %>'
-  }]
+  },
+  //MIO
+  {
+    expand: true,
+    cwd: 'bower_components/fontawesome/fonts/',
+    src: ['*.*'],
+    dest: '<%= config.dist %>/fonts'
+  },
+  {
+    expand: true,
+    cwd: 'bower_components/jquery.gritter/images/',
+    src: ['*.*'],
+    dest: '<%= config.dist %>/images'
+  },
+  //FINMIO
+  ]
 },
 styles: {
   expand: true,

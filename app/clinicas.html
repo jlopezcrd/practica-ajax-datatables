@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <title>practica ajax datatables</title>
   <meta name="description" content="">
+  <meta lang="ES">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="/favicon.ico">
@@ -12,7 +13,8 @@
   <!-- bower:css -->
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
   <link rel="stylesheet" href="bower_components/datatables/media/css/jquery.dataTables.css" />
-  <link rel="stylesheet" href="bower_components/gritter/css/jquery.gritter.css" />
+  <link rel="stylesheet" href="bower_components/jquery.gritter/css/jquery.gritter.css" />
+  <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css" />
   <!-- endbower -->
   <!-- endbuild -->
   <!-- build:css(.tmp) styles/main.css -->
@@ -25,26 +27,59 @@
       <![endif]-->
 
 
-      <div class="container">
+      <div class="row-fluid">
         <div class="col-lg-12">
           <div class="header">
-            <ul class="nav nav-pills pull-right">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#">About</a></li>
-              <li><a href="#">Contact</a></li>
+            <ul class="nav nav-tabs pull-right">
+              <li><a href="#"><i class='fa fa-home fa-fw'></i> INICIO</a></li>
+              <li class="active sombreado"><a href="#"><i class='fa fa-book fa-fw'></i>  CLINICAS</a></li>
+              <li><a href="doctores.html"><i class='fa fa-users fa-fw'></i> DOCTORES</a></li>
+              <li role="presentation" class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                  <i class='fa fa-tasks fa-fw'></i> TRABAJOS <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#"><i class='fa fa-file-text-o fa-fw'></i> PRESCRIPCIONES</a></li>
+                  <li><a href="#"><i class='fa fa-truck fa-fw'></i> DEVOLUCIONES</a></li>
+                </ul>
+              </li>
+              <li role="presentation" class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                  <i class='fa fa-bar-chart fa-fw'></i> FACTURACION <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="tarifas.html"><i class='fa fa-line-chart fa-fw'></i> TARIFAS</a></li>
+                  <li><a href="#"><i class='fa fa-shopping-cart fa-fw'></i> FACTURAS</a></li>
+                  <li><a href="#"><i class='fa fa-file-pdf-o fa-fw'></i> ALBARANES</a></li>
+                </ul>
+              </li>
+              <li><a href="#"><i class='fa fa-briefcase fa-fw'></i> MIS DATOS</a></li>
+              <li><a href="#"><i class='fa fa-envelope fa-fw'></i> CONTACTO</a></li>
             </ul>
-            <h3 class="text-muted">practica ajax datatables</h3>
+            <h3 class="text-muted">GESTICLINIC S.L.</h3>
+          </div>
+          <div class="menu">
+
           </div>
 
           <div class="col-lg-12">
-            <table class="table table-striped table-bordered" cellspacing="0" width="100%" id="doctores">
+            <div class="text-left" style="margin-bottom: 2%;">
+              <button type="button" class='btn btn-default' title="Crear nueva clinica" alt="Crear nueva clinica"><i class="fa fa-plus fa-3x" onclick=abrirModal('crear&')></i></button>
+              <button type="button" class='btn btn-default' title="Actualizar tabla" alt="Actualizar tabla"><i class="fa fa-refresh fa-3x" onclick=actualizarTablaDatos($(this)); id="refresh"></i></button>
+            </div>
+            <table class="table table-striped" cellspacing="0" width="100%" id="clinicas">
               <thead>
                 <tr>
-                  <td>ID DOCTOR</td>
+                  <td>NUMCL</td>
                   <td>NOMBRE</td>
-                  <td>COLEGIADO</td>
-                  <td>CLINICAS</td>
-                  <td>OPCIONES</td>
+                  <td>RAZONSOCIAL</td>
+                  <td>CIF</td>
+                  <td>LOCALIDAD</td>
+                  <td>PROVINCIA</td>
+                  <td>DIRECCION</td>
+                  <td>CP</td>
+                  <td>TARIFA</td>
+                  <td class="text-center" style="min-width: 120px;">OPCIONES</td>
                 </tr>
               </thead>
               <tbody>
@@ -71,8 +106,22 @@
             <div class="modal-body" id="myModalBody">
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
+              <button type="button" id="btn-cancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+              <button type="button" id="btn-guardar" class="btn btn-success">Guardar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ALerta -->
+      <div class="modal" id="alerta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="alert">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="alertaLabel"></h4>
+            </div>
+            <div class="modal-body" id="alertaBody">
             </div>
           </div>
         </div>
@@ -82,7 +131,7 @@
       <!-- bower:js -->
       <script src="bower_components/jquery/dist/jquery.js"></script>
       <script src="bower_components/datatables/media/js/jquery.dataTables.js"></script>
-      <script src="bower_components/gritter/js/jquery.gritter.min.js"></script>
+      <script src="bower_components/jquery.gritter/js/jquery.gritter.js"></script>
       <!-- endbower -->
       <!-- endbuild -->
 
@@ -112,7 +161,7 @@
       <!-- endbuild -->
 
       <!-- build:js({app,.tmp}) scripts/main.js -->
-      <script src="scripts/main.js"></script>
+      <script src="scripts/clinicas.js"></script>
 
       <!-- endbuild -->
     </body>
