@@ -202,7 +202,8 @@ livereload: {
         assetsDirs: [
         '<%= config.dist %>',
         '<%= config.dist %>/images',
-        '<%= config.dist %>/styles'
+        '<%= config.dist %>/styles',
+        '<%= config.dist %>/scripts'
         ]
       },
     html: ['<%= config.dist %>/{,*/}*.html'],
@@ -316,6 +317,12 @@ htmlmin: {
     cwd: 'bower_components/jquery.gritter/images/',
     src: ['*.*'],
     dest: '<%= config.dist %>/images'
+  },
+  {
+    expand: true,
+    cwd: '<%= config.app %>/scripts',
+    src: ['*.*'],
+    dest: '<%= config.dist %>/scripts'
   },
   //FINMIO
   ]

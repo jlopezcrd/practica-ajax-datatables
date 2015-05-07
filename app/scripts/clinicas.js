@@ -117,10 +117,10 @@ function guardarForm(idForm, idModal) {
         console.log($("#"+idForm).serialize());
         if(idForm=="nuevaClinica") {
             $.ajax({
-               type: 'POST',
-               url: 'http://jorgelopez.infenlaces.com/postNuevaClinica.php',
-               data: $("#"+idForm).serialize(),
-               success: function(data){
+             type: 'POST',
+             url: 'http://jorgelopez.infenlaces.com/postNuevaClinica.php',
+             data: $("#"+idForm).serialize(),
+             success: function(data){
                 $("#"+idModal).modal('toggle');
                 actualizarTablaDatos();
                 mostrarAlerta(data);
@@ -134,10 +134,10 @@ function guardarForm(idForm, idModal) {
         } else {
             console.log($("#"+idForm).serialize());
             $.ajax({
-               type: 'POST',
-               url: 'http://jorgelopez.infenlaces.com/postModificarClinica.php',
-               data: $("#"+idForm).serialize(),
-               success: function(data){
+             type: 'POST',
+             url: 'http://jorgelopez.infenlaces.com/postModificarClinica.php',
+             data: $("#"+idForm).serialize(),
+             success: function(data){
                 $("#"+idModal).modal('toggle');
                 actualizarTablaDatos();
                 mostrarAlerta(data);

@@ -11,7 +11,21 @@ console.log('\'Allo \'Allo!');
 //}
 //});
 
+function mostrarAlerta(titulo, texto) {
+    var unique_id = $.gritter.add({
+        // (string | mandatory) the heading of the notification
+        title: titulo,
+        // (string | mandatory) the text inside the notification
+        text: texto,
+        // (bool | optional) if you want it to fade out on its own or just sit there
+        sticky: false,
+        // (int | optional) the time you want it to be alive for before fading out (milliseconds)
+        time: 1500
+    });
+}
+
 function cargarDatos() {
+    console.log("estoy");
     $('#doctores').dataTable( {
         "ajax": "http://jorgelopez.infenlaces.com/getDoctores_mejor.php",
         "columns": [
@@ -33,6 +47,7 @@ function cargarDatos() {
             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
         }
     } );
+mostrarAlerta("Perfecto!", "Datos cargados correctamente!");
 }
 
 function abrirModal(valor) {
@@ -79,5 +94,6 @@ function cargarDatosEditar() {
 }
 
 $(document).ready(function($) {
+    console.log("hola");
     cargarDatos();
 });
