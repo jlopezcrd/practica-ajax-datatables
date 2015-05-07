@@ -2,18 +2,20 @@ console.log('\'Allo \'Allo!');
 
 var debug = false;
 
+urlAjax = "http://jorgelopez.infenlaces.com/";
+
 if(debug) {
 
     $.ajax({
-        url: "http://localhost:8888/practica-ajax-datatables/app/getClinicas.php",
+        url: urlAjax+"getClinicas.php",
         datatype: "json",
         success: function(data){
             console.log(data);
             /*$.each(data, function( key, value ) {
                 console.log(key+value);
             });*/
-    }
-    });
+}
+});
 
 }
 
@@ -37,19 +39,19 @@ function centrarValorTabla(data) {
 function cargarDatos() {
     $('#tarifas').dataTable( {
         //"ajax": "http://localhost:8888/@LOS_ENLACES/DWEC/practica-ajax-datatables/app/getClinicas.php",
-        "ajax": "http://localhost:8888/practica-ajax-datatables/app/getTarifas.php",
+        "ajax": urlAjax+"getTarifas.php",
         "columns": [
         { "data": "id_tarifa",
         'render': function(data) { return centrarValorTabla(data)}},
         { "data": "nombre" },
         { "data": "descripcion" },
         { "data": "id_tarifa",
-            'render': function(data) {
-                return "<div class='text-right'><button type='button' class='btn btn-success' onclick=abrirModal('mostrar&"+data+"');><i class='fa fa-search'></i></button> "+
-                "<button type='button' class='btn btn-info' onclick=abrirModal('editar&"+data+"');><i class='fa fa-edit'></i></button> "+
-                "<button type='button' class='btn btn-warning' onclick=abrirModal('borrar&"+data+"');><i class='fa fa-trash'></i></button></div>";
-            }
-        },
+        'render': function(data) {
+            return "<div class='text-right'><button type='button' class='btn btn-success' onclick=abrirModal('mostrar&"+data+"');><i class='fa fa-search'></i></button> "+
+            "<button type='button' class='btn btn-info' onclick=abrirModal('editar&"+data+"');><i class='fa fa-edit'></i></button> "+
+            "<button type='button' class='btn btn-warning' onclick=abrirModal('borrar&"+data+"');><i class='fa fa-trash'></i></button></div>";
+        }
+    },
         // return '<div class="text-right"><button type="button" class="btn btn-info" onclick=abrirModal(editar&'+ data +');>Editar</button> <a class="btn btn-warning" href=http://localhost/php/borrar.php?id_clinica=' + data + '>Borrar</a>'
         //{ "defaultContent": "<div class='text-right'><button type='button' class='btn btn-info' onclick=abrirModal('editar'); id="">Editar</button> <button type='button' class='btn btn-warning' onclick=abrirModal('borrar');>Borrar</button></div>"}
         ],
@@ -58,7 +60,7 @@ function cargarDatos() {
             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
         }
     } );
-    mostrarAlerta("Perfecto!", "Datos cargados correctamente!");
+mostrarAlerta("Perfecto!", "Datos cargados correctamente!");
 }
 
 function actualizarTablaDatos() {
@@ -82,7 +84,7 @@ function abrirModal(valor) {
         var r = confirm("¿Esta seguro que quiere eliminar?");
         if (r == true) {
             $.ajax({
-                url: "http://localhost:8888/practica-ajax-datatables/app/postBorrarTarifa.php?id="+fun[1],
+                url: urlAjax+"postBorrarTarifa.php?id="+fun[1],
                 type: 'GET',
                 success: function(data){
                     mostrarAlerta(data);
@@ -107,71 +109,71 @@ function guardarForm(idForm, idModal) {
         //$("#"+idForm).submit();
         console.log($("#"+idForm).serialize());
         if(idForm=="nuevaTarifa") {
-            $.ajax({   
-               type: 'POST',   
-               url: 'http://localhost:8888/practica-ajax-datatables/app/postNuevaTarifa.php',   
+            $.ajax({
+               type: 'POST',
+               url: urlAjax+'postNuevaTarifa.php',
                data: $("#"+idForm).serialize(),
                success: function(data){
                 $("#"+idModal).modal('toggle');
                 actualizarTablaDatos();
                 mostrarAlerta(data);
-               },
-               error: function(data){
+            },
+            error: function(data){
                 console.log(data);
                 $("#"+idModal).modal('toggle');
                 mostrarAlerta("Error!", "Registro no insertado!");
-               }
-            }); 
+            }
+        });
         } else {
             console.log($("#"+idForm).serialize());
-            $.ajax({   
-               type: 'POST',   
-               url: 'http://localhost:8888/practica-ajax-datatables/app/postModificarTarifa.php',   
+            $.ajax({
+               type: 'POST',
+               url: urlAjax+'postModificarTarifa.php',
                data: $("#"+idForm).serialize(),
                success: function(data){
                 $("#"+idModal).modal('toggle');
                 actualizarTablaDatos();
                 mostrarAlerta(data);
-               },
-               error: function(data){
+            },
+            error: function(data){
                 console.log(data);
                 $("#"+idModal).modal('toggle');
                 mostrarAlerta("Error!", "Registro no actualizado!");
-               }
-            }); 
+            }
+        });
         }
     }
 
-function nuevaTarifa(titulo) {
-    $('#myModalLabel').text(titulo);
-    $('#myModalBody').html(
-        "<form action='' id='nuevaTarifa' class='form-horizontal'>"+
-        "<label>Nombre: </label> <input type='text' name='nombre' class='form-control'/></input><br/>"+
-        "<label>Descripcion: </label> <input type='text' name='descripcion' class='form-control'/></input><br/>");
-    $('#myModalBody').html($('#myModalBody').html()+"</form>");
-    $('#btn-guardar').attr('onclick','guardarForm("nuevaTarifa","myModal");');
-    $('#myModal').modal('toggle');
-}
+    function nuevaTarifa(titulo) {
+        $('#myModalLabel').text(titulo);
+        $('#myModalBody').html(
+            "<form action='' id='nuevaTarifa' class='form-horizontal'>"+
+            "<label>Nombre: </label> <input type='text' name='nombre' class='form-control'/></input><br/>"+
+            "<label>Descripcion: </label> <input type='text' name='descripcion' class='form-control'/></input><br/>");
+        $('#myModalBody').html($('#myModalBody').html()+"</form>");
+        $('#btn-guardar').attr('onclick','guardarForm("nuevaTarifa","myModal");');
+        $('#myModal').modal('toggle');
+    }
 
-function cargarDatosEditar(titulo, id) {
-    $.ajax({
-        url: "http://localhost:8888/practica-ajax-datatables/app/getTarifaAjax.php?id="+id,
-        success: function(data){
-            console.log(data);
-            $('#myModalLabel').text(titulo);
-            $('#myModalBody').html(
-            "<form action='' id='modificarTarifa' class='form-horizontal'>"+
-            "<input type='hidden' name='id_tarifa' value='"+data[0].id_tarifa+"'></input>"+
-            "<label>Nombre: </label> <input type='text' name='nombre' class='form-control' value='"+data[0].nombre+"'/></input><br/>"+
-            "<label>Razon Social: </label> <input type='text' name='descripcion' class='form-control' value='"+data[0].descripcion+"'/></input><br/>");
+    function cargarDatosEditar(titulo, id) {
+        $.ajax({
+            url: urlAjax+"getTarifaAjax.php?id="+id,
+            success: function(data){
+                console.log(data);
+                $('#myModalLabel').text(titulo);
+                $('#myModalBody').html(
+                    "<form action='' id='modificarTarifa' class='form-horizontal'>"+
+                    "<input type='hidden' name='id_tarifa' value='"+data[0].id_tarifa+"'></input>"+
+                    "<label>Nombre: </label> <input type='text' name='nombre' class='form-control' value='"+data[0].nombre+"'/></input><br/>"+
+                    "<label>Razon Social: </label> <input type='text' name='descripcion' class='form-control' value='"+data[0].descripcion+"'/></input><br/>");
 
-            $('#myModalBody').html($('#myModalBody').html()+"</form>");
-            $('#btn-guardar').attr('onclick','guardarForm("modificarTarifa","myModal");');
-            $('#myModal').modal('toggle');
-        }
+                $('#myModalBody').html($('#myModalBody').html()+"</form>");
+                $('#btn-guardar').attr('onclick','guardarForm("modificarTarifa","myModal");');
+                $('#myModal').modal('toggle');
+            }
+        });
+    }
+
+    $(document).ready(function($) {
+        cargarDatos();
     });
-}
-
-$(document).ready(function($) {
-    cargarDatos();
-});

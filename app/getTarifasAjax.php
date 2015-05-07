@@ -2,7 +2,7 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
-$conn = new mysqli("localhost", "root", "root", "clinicas");
+$conn = new mysqli("localhost", "jorgelopez_usr", "datatablesajax", "jorgelopez_datatables");
 
 $result = $conn->query("SELECT id_tarifa, nombre, descripcion FROM tarifas");
 
@@ -11,7 +11,7 @@ while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
     if ($outp != "[") {$outp .= ",";}
     $outp .= '{"id_tarifa":"'  . $rs["id_tarifa"] . '",';
     $outp .= '"nombre":"'   . $rs["nombre"]        . '",';
-    $outp .= '"descripcion":"'. $rs["descripcion"]     . '"}'; 
+    $outp .= '"descripcion":"'. $rs["descripcion"]     . '"}';
 }
 $outp .="]";
 

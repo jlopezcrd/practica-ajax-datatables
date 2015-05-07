@@ -5,7 +5,7 @@ var debug = false;
 if(debug) {
 
     $.ajax({
-        url: "http://localhost:8888/@LOS_ENLACES/DWEC/practica-ajax-datatables/app/getClinicas.php",
+        url: "http://jorgelopez.infenlaces.com/getClinicas.php",
         datatype: "json",
         success: function(data){
             console.log(data);
@@ -37,7 +37,7 @@ function centrarValorTabla(data) {
 function cargarDatos() {
     $('#clinicas').dataTable( {
         //"ajax": "http://localhost:8888/@LOS_ENLACES/DWEC/practica-ajax-datatables/app/getClinicas.php",
-        "ajax": "http://localhost:8888/@LOS_ENLACES/DWEC/practica-ajax-datatables/app/getClinicas.php",
+        "ajax": "http://jorgelopez.infenlaces.com/getClinicas.php",
         "columns": [
         { "data": "numclinica",
         'render': function(data) { return centrarValorTabla(data)}},
@@ -91,7 +91,7 @@ function abrirModal(valor) {
         var r = confirm("¿Esta seguro que quiere eliminar?");
         if (r == true) {
             $.ajax({
-                url: "http://localhost:8888/@LOS_ENLACES/DWEC/practica-ajax-datatables/app/postBorrarClinica.php?id="+fun[1],
+                url: "http://jorgelopez.infenlaces.com/postBorrarClinica.php?id="+fun[1],
                 type: 'GET',
                 success: function(data){
                     mostrarAlerta(data);
@@ -117,10 +117,10 @@ function guardarForm(idForm, idModal) {
         console.log($("#"+idForm).serialize());
         if(idForm=="nuevaClinica") {
             $.ajax({
-             type: 'POST',
-             url: 'http://localhost:8888/@LOS_ENLACES/DWEC/practica-ajax-datatables/app/postNuevaClinica.php',
-             data: $("#"+idForm).serialize(),
-             success: function(data){
+               type: 'POST',
+               url: 'http://jorgelopez.infenlaces.com/postNuevaClinica.php',
+               data: $("#"+idForm).serialize(),
+               success: function(data){
                 $("#"+idModal).modal('toggle');
                 actualizarTablaDatos();
                 mostrarAlerta(data);
@@ -134,10 +134,10 @@ function guardarForm(idForm, idModal) {
         } else {
             console.log($("#"+idForm).serialize());
             $.ajax({
-             type: 'POST',
-             url: 'http://localhost:8888/@LOS_ENLACES/DWEC/practica-ajax-datatables/app/postModificarClinica.php',
-             data: $("#"+idForm).serialize(),
-             success: function(data){
+               type: 'POST',
+               url: 'http://jorgelopez.infenlaces.com/postModificarClinica.php',
+               data: $("#"+idForm).serialize(),
+               success: function(data){
                 $("#"+idModal).modal('toggle');
                 actualizarTablaDatos();
                 mostrarAlerta(data);
@@ -154,7 +154,7 @@ function guardarForm(idForm, idModal) {
     function nuevaClinica(titulo) {
         var numClinica;
         $.ajax({
-            url: "http://localhost:8888/@LOS_ENLACES/DWEC/practica-ajax-datatables/app/getNumClinicaMax.php",
+            url: "http://jorgelopez.infenlaces.com/getNumClinicaMax.php",
             async: false,
             success: function(data){
                 numClinica = (parseInt(data)+1);
@@ -172,7 +172,7 @@ function guardarForm(idForm, idModal) {
             "<label>CP: </label> <input type='text' name='cp' class='form-control'/></input><br/>"+
             "<label>NumClinica: </label> <input type='text' name='numclinica' class='form-control'/ value='"+numClinica+"'></input><br/>");
         $.ajax({
-            url: "http://localhost:8888/@LOS_ENLACES/DWEC/practica-ajax-datatables/app/getTarifasAjax.php",
+            url: "http://jorgelopez.infenlaces.com/getTarifasAjax.php",
             datatype: "json",
             success: function(data){
                 //console.log(data);
@@ -190,7 +190,7 @@ function guardarForm(idForm, idModal) {
 
     function cargarDatosEditar(titulo, id) {
         $.ajax({
-            url: "http://localhost:8888/@LOS_ENLACES/DWEC/practica-ajax-datatables/app/getClinicaAjax.php?id="+id,
+            url: "http://jorgelopez.infenlaces.com/getClinicaAjax.php?id="+id,
             success: function(data){
                 console.log(data);
                 $('#myModalLabel').text(titulo);
@@ -206,7 +206,7 @@ function guardarForm(idForm, idModal) {
                     "<label>CP: </label> <input type='text' name='cp' class='form-control' value='"+data[0].cp+"'/></input><br/>"+
                     "<label>NumClinica: </label> <input type='text' name='numclinica' class='form-control'/ value='"+data[0].numclinica+"'></input><br/>");
 $.ajax({
-    url: "http://localhost:8888/practica-ajax-datatables/app/getTarifasAjax.php",
+    url: "http://jorgelopez.infenlaces.com/getTarifasAjax.php",
     datatype: "json",
     success: function(tarifas){
                     //console.log(data);

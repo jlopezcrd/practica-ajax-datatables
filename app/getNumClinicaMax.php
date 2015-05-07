@@ -2,7 +2,7 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
-$conn = new mysqli("localhost", "root", "root", "clinicas");
+$conn = new mysqli("localhost", "jorgelopez_usr", "datatablesajax", "jorgelopez_datatables");
 
 $result = $conn->query("SELECT numclinica FROM clinicas ORDER BY numclinica DESC LIMIT 1");
 

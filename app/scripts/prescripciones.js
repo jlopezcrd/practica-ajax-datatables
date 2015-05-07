@@ -2,7 +2,7 @@ console.log('\'Allo \'Allo!');
 
 var debug = false;
 
-urlAjax = "http://localhost:8888/@LOS_ENLACES/DWEC/practica-ajax-datatables/app/";
+urlAjax = "http://jorgelopez.infenlaces.com/app/";
 
 if(debug) {
 

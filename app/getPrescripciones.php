@@ -44,9 +44,9 @@ $columns = array(
 
 // SQL server connection information
 $sql_details = array(
-    'user' => 'root',
-    'pass' => 'root',
-    'db'   => 'clinicas',
+    'user' => 'jorge_lopez_usr',
+    'pass' => 'datatablesajax',
+    'db'   => 'jorge_lopez_datatables',
     'host' => 'localhost'
     );
 

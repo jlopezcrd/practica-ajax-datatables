@@ -13,7 +13,7 @@ console.log('\'Allo \'Allo!');
 
 function cargarDatos() {
     $('#doctores').dataTable( {
-        "ajax": "http://localhost:8888/@LOS_ENLACES/DWEC/practica-ajax-datatables/app/getDoctores_mejor.php",
+        "ajax": "http://jorgelopez.infenlaces.com/getDoctores_mejor.php",
         "columns": [
         { "data": "id_doctor" },
         { "data": "nombre" },
