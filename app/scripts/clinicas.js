@@ -64,7 +64,7 @@ function cargarDatos() {
         ],
         stateSave: true,
         "language": {
-            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            "url": "http://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
         }
     } );
 mostrarAlerta("Perfecto!", "Datos cargados correctamente!");
@@ -117,10 +117,10 @@ function guardarForm(idForm, idModal) {
         console.log($("#"+idForm).serialize());
         if(idForm=="nuevaClinica") {
             $.ajax({
-               type: 'POST',
-               url: 'http://localhost:8888/@LOS_ENLACES/DWEC/practica-ajax-datatables/app/postNuevaClinica.php',
-               data: $("#"+idForm).serialize(),
-               success: function(data){
+             type: 'POST',
+             url: 'http://localhost:8888/@LOS_ENLACES/DWEC/practica-ajax-datatables/app/postNuevaClinica.php',
+             data: $("#"+idForm).serialize(),
+             success: function(data){
                 $("#"+idModal).modal('toggle');
                 actualizarTablaDatos();
                 mostrarAlerta(data);
@@ -134,10 +134,10 @@ function guardarForm(idForm, idModal) {
         } else {
             console.log($("#"+idForm).serialize());
             $.ajax({
-               type: 'POST',
-               url: 'http://localhost:8888/@LOS_ENLACES/DWEC/practica-ajax-datatables/app/postModificarClinica.php',
-               data: $("#"+idForm).serialize(),
-               success: function(data){
+             type: 'POST',
+             url: 'http://localhost:8888/@LOS_ENLACES/DWEC/practica-ajax-datatables/app/postModificarClinica.php',
+             data: $("#"+idForm).serialize(),
+             success: function(data){
                 $("#"+idModal).modal('toggle');
                 actualizarTablaDatos();
                 mostrarAlerta(data);
